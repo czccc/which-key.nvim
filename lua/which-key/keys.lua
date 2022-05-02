@@ -126,7 +126,7 @@ function M.get_mappings(mode, prefix_i, buf)
         value.label = value.label:gsub("^%+", "")
         value.label = Config.options.icons.group .. value.label
       elseif not value.label then
-        value.label = value.cmd or ""
+        value.label = value.desc or value.cmd or ""
         for _, v in ipairs(Config.options.hidden) do
           value.label = value.label:gsub(v, "")
         end
@@ -555,6 +555,7 @@ function M.update_keymaps(mode, buf)
         id = Util.t(keymap.lhs),
         prefix = keymap.lhs,
         cmd = keymap.rhs,
+        desc = keymap.desc,
         keys = Util.parse_keys(keymap.lhs),
       }
       -- don't include Plug keymaps
